@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  </head>
+  <body>
+  	<script type="text/javascript">
+  		updateStudent = function(){
+        var data = {};
+        data.id = $("#id").val();
+  			data.name = $("#name").val();
+        data.email = $("#classname").val();
+        data.phone = $("#parentname").val();
+        data.address = $("#schoolname").val();
+        data.age = $("#subject").val();
+        
+  			
+  			$.ajax({
+			    url : "/api/student",
+			    type: "PUT",
+			    data : data,
+			    success: function(data, textStatus, jqXHR) {
+			    	if(data.result == "success"){
+			    		location = "/student";
+			    	}
+			    },
+			    error: function (jqXHR, textStatus, errorThrown){
+			    	alert("Unable to connect remote server..");
+			    }
+			});
+  		}
+  	</script>
+    <h1><%= title %></h1>
+    <input id="id" value="<%= student._id %>" readonly> <br/><br/>
+    <input id="name" type="" value="<%= student.name %>" placeholder="name" name=""> <br/><br/>
+    <input id="classname" type="" value="<%= student.classname %>" placeholder="classname" name=""> <br/><br/>
+    <input id="parentname" type="" value="<%= student.parentname %>" placeholder="parentname" name=""> <br/><br/>
+    <input id="schoolname" type="" value="<%= student.schoolname %>" placeholder="schoolname" name=""> <br/><br/>
+    <input id="subject" type="" value="<%= student.subject %>" placeholder="subject" name=""> <br/><br/>
+    <input type="button" placeholder="username" name="" onclick="updateStudent()" value="Update">
+  </body>
+</html>
