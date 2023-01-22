@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  </head>
+  <body>
+  	<script type="text/javascript">
+  		addCustomer = function(){
+        var data = {};
+  			data.name = $("#name").val();
+        data.email = $("#email").val();
+        data.phone = $("#phone").val();
+        data.address = $("#address").val();
+        data.age = $("#age").val();
+        data.country = $("#country").val();
+  			
+  			$.ajax({
+			    url : "/api/customer",
+			    type: "POST",
+			    data : data,
+			    success: function(data, textStatus, jqXHR) {
+			    	if(data.result == "success"){
+			    		location = "/customer";
+			    	}
+			    },
+			    error: function (jqXHR, textStatus, errorThrown){
+			    	alert("Unable to connect remote server..");
+			    }
+			});
+  		}
+  	</script>
+    <h1><%= title %></h1>
+    <input id="name" type="" placeholder="name" name=""> <br/><br/>
+    <input id="email" type="" placeholder="email" name=""> <br/><br/>
+    <input id="phone" type="" placeholder="phone" name=""> <br/><br/>
+    <input id="address" type="" placeholder="address" name=""> <br/><br/>
+    <input id="age" type="" placeholder="age" name=""> <br/><br/>
+    <input id="country" type="" placeholder="country" name=""> <br/><br/>
+    <input type="button" placeholder="username" name="" onclick="addCustomer()" value="Add">
+  </body>
+</html>
